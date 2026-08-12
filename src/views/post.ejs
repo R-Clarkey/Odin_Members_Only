@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post a message</title>
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <% if (errors && errors.length) { %>
+      <div class="error-messages">
+        <ul>
+          <% errors.forEach((e) => { %>
+            <li><%= e.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+    <%- include("partials/navbar") %>
+    <div id="post-main-container">
+      <div id="post-form-container">
+        <h2>Create your message</h2>
+        <form id="post-form" action="/messages/post" method="POST">
+
+          <div>
+            <label for="title">Message Title</label><br>
+            <input name="title" />
+          </div>
+
+          <div>
+            <label for="message">Message</label><br>
+            <input type="text" name="message" />
+          </div>
+
+          <button id="post-form-button" type="submit">Post message</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

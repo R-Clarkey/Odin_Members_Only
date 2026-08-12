@@ -1,11 +1,11 @@
 <nav class="navbar">
   <div class="navbar-inner">
-    <a class="navbar-brand" href="/">Members Only</a>
-
+    <div class="navbar-brand"><a id="navbar-brand-title" href="/">Members Only Club</a></div>
     <div class="navbar-links">
       <% if (currentUser) { %>
-        <span class="navbar-user">Signed in as <%= currentUser.username %></span>
-        <a class="navbar-link navbar-link--button" href="/log-out">Log out</a>
+        <div class="navbar-user">Signed in as <%= currentUser.username %></div>
+        <div><a class="navbar-link navbar-link-button" href="/log-out">Log out</a></div>
+        <div><a class="navbar-link navbar-link-button" href="/messages/post">Post</a></div>
       <% } else { %>
         <a class="navbar-link" href="/sign-up">Sign up</a>
       <% } %>

@@ -4,30 +4,101 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/5c30b5e5d4.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
+
   <body>
-    <%- include("partials/navbar") %>
-    <h1>Home</h1>
+    <% if (errors && errors.length) { %>
+      <div class="error-messages">
+        <ul>
+          <% errors.forEach((e) => { %>
+            <li><%= e.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
     <% if (currentUser) { %>
-      <p>Welcome, <%= currentUser.username %>!</p>
-      <a href="/log-out">Log out</a>
+      <%- include("partials/navbar") %>
+
+      <main id="index-main-container">
+        <section id="index-main-section">
+          <p>Welcome, <%= currentUser.first_name %>!</p>
+
+          <div id="index-messages-container">
+            <% data.forEach(message => { %>
+              <article class="message-card message-card--d">
+                <div class="message-card__icon">
+                  <i class="fa-regular fa-user"></i>
+                </div>
+
+                <div class="message-card__content">
+                  <div class="message-card__meta">
+                    <span class="message-card__name">
+                      <%= currentUser.is_member ? message.first_name : "****" %>
+                    </span>
+
+                    <span class="message-card__datetime">
+                      <span class="message-card__date">
+                        <%= currentUser.is_member ? message.date : "****" %>
+                      </span>
+                      <span class="message-card__time">
+                        <%= currentUser.is_member ? message.time : "****" %>
+                      </span>
+                    </span>
+                  </div>
+
+                  <div class="message-card__title">
+                    <%= message.title %>
+                  </div>
+
+                  <div class="message-card__message">
+                    <%= message.message %>
+                  </div>
+                </div>
+              </article>
+            <% }) %>
+          </div>
+        </section>
+      </main>
+
+      <%- include("partials/footer") %>
     <% } else { %>
-      <a href="/sign-up">Sign up</a>
+      <div class="auth-main">
+        <div class="auth-card">
+          <h1>Login</h1>
 
-      <form action="/log-in" method="POST">
-        <div>
-          <label>Username</label>
-          <input name="username" />
+          <% if (errors && errors.length) { %>
+            <div class="error-messages">
+              <ul>
+                <% errors.forEach((e) => { %>
+                  <li><%= e.msg %></li>
+                <% }) %>
+              </ul>
+            </div>
+          <% } %>
+
+          <form id="index-form" action="/log-in" method="POST">
+            <div>
+              <label for="username">Username</label>
+              <input id="username" name="username" />
+            </div>
+
+            <div>
+              <label for="password">Password</label>
+              <input id="password" type="password" name="password" />
+            </div>
+
+            <button type="submit">Log in</button>
+          </form>
+
+          <a class="auth-footer-link" href="/sign-up">No account? Sign up</a>
         </div>
-
-        <div>
-          <label>Password</label>
-          <input type="password" name="password" />
-        </div>
-
-        <button type="submit">Log in</button>
-      </form>
+      </div>
     <% } %>
   </body>
 </html>

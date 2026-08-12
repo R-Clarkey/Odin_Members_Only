@@ -10,6 +10,8 @@ const configurePassport = require("./config/passportConfig")
 
 const homeRouter = require("./routes/homeRouter")
 const authRouter = require("./routes/authRouter")
+const messageRouter = require("./routes/messageRouter")
+const membershipRouter = require("./routes/membershipRouter")
 
 configurePassport()
 
@@ -39,5 +41,7 @@ app.use((req, res, next) => {
 
 app.use("/", homeRouter)
 app.use("/", authRouter)
+app.use("/messages", messageRouter)
+app.use("/membership", membershipRouter)
 
 module.exports = app
