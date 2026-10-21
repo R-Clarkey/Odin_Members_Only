@@ -28,9 +28,3 @@ A private clubhouse message board built with Express, authentication with Passpo
 - Prisma
 - Passport.js
 - EJS
-- [CSS / other frontend tools]
-
-
-
-   git clone [repository URL]
-   cd [project folder]
